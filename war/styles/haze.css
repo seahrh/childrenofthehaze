@@ -1,0 +1,113 @@
+/* Default Resets
+********************************************************/
+h1 {
+	margin: .5em 0 .5em 0;
+}
+
+/* Bootstrap Resets
+********************************************************/
+
+.navbar a.brand {
+	/* Max font size to prevent wrapping 
+	at viewport width 1000px */
+	font-size: 1.24em;
+}
+
+/* Social Buttons
+********************************************************/
+#fb-like-button {
+	margin-right: 1.2em;
+}
+
+#fb-like-button,#gplus-button,#tweet-button {
+	margin-top: .7em;
+}
+
+/* Custom Styles
+********************************************************/
+.inline-top {
+	display: inline-block;
+	vertical-align: top;
+}
+
+p.essay {
+	margin: 1em 0 1em 0;
+	text-align: justify;
+}
+
+div.well p {
+	text-align: justify
+}
+
+ol.essay,ul.essay {
+	margin-bottom: 3em;
+}
+
+ol.essay li,ul.essay li {
+	text-align: justify;
+}
+
+hr.footer-line {
+	margin-top: 5em;
+}
+
+/* Infobar beside the page title
+********************************************************/
+
+.infobar a {
+	margin: 0 .5em .5em 0;
+}
+
+/* Google Visualization UI
+********************************************************/
+
+.goog-menu-vertical {
+	max-height: 30em;
+	overflow-y: auto;
+	z-index: 15;
+}
+
+/*
+Set the entire width of the combobox
+including input field and dropdown button
+*/
+
+.gviz.control-occupation .goog-combobox {
+	width: 60em;
+}
+
+/*
+Set the width of the input field
+and the dropdown list below it
+*/
+
+.gviz.control-occupation .goog-combobox .goog-menu,
+.gviz.control-occupation .goog-combobox.goog-inline-block > input {
+	width: 58em;
+}
+
+/* Default chart size */
+
+.gviz.chart {
+	/* now gviz will automatically fill parent's width */
+	height: 30em;
+}
+
+/* Charts
+********************************************************/
+
+.chart-container {
+	margin: 2em 0 2em 0;
+}
+
+#psi-hourly.chart, 
+#psi-region.chart,
+#pm25.chart {
+	margin: 0 0 1em 0;
+	height: 25em;
+}
+
+#pm25-advisory {
+	margin: 2em 0 .5em 0;
+}
+
