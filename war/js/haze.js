@@ -18,7 +18,7 @@ Haze.Viz.PM25.query = function() {
 };
 
 Haze.Viz.PM25.dashboard = function(response) {
-	var containerId = "dashboard-pm25";
+	var containerId = "pm25";
 	var data = response.getDataTable();
 	
 	// Create dashboard
@@ -28,7 +28,7 @@ Haze.Viz.PM25.dashboard = function(response) {
 
 	var dateControl = new google.visualization.ControlWrapper({
 		"controlType" : "ChartRangeFilter",
-		"containerId" : "pm25-date-filter",
+		"containerId" : "pm25-control1",
 		"options" : {
 			"filterColumnIndex" : 0,
 			"ui" : {
@@ -69,7 +69,7 @@ Haze.Viz.PM25.dashboard = function(response) {
 	});
 	
 	var chart = new google.visualization.ChartWrapper({
-		"containerId" : "pm25",
+		"containerId" : "pm25-chart1",
 		"chartType" : "AreaChart",
 		"options" : {
 			"title" : "PM2.5 vs. PSI 24-Hour Averages",
@@ -97,9 +97,9 @@ Haze.Viz.PM25.dashboard = function(response) {
 			},
 			"chartArea" : {
 				"width" : "99%",
-				"height" : "85%",
+				"height" : "90%",
 				"left" : 0,
-				"top" : 50
+				"top" : 40
 			},
 			"focusTarget" : "category",
 			"series" : [ {
@@ -130,10 +130,11 @@ Haze.Viz.PSI.query = function() {
 			+ "label E '', F '', G '', H '' "
 			+ "format A 'EEE ha, d MMM yyyy' ");
 
-	query.send(Haze.Viz.PSI.chart);
+	query.send(Haze.Viz.PSI.dashboard);
 };
 
-Haze.Viz.PSI.chart = function(response) {
+Haze.Viz.PSI.dashboard = function(response) {
+	var containerId = "psi";
 	var data = response.getDataTable();
 	
 	// Annotation for PSI 3-hr
@@ -143,10 +144,58 @@ Haze.Viz.PSI.chart = function(response) {
 	// Annotation for PSI 24-hr MAX column
 	data.setColumnProperty(6, "role", "annotation");
 	data.setColumnProperty(7, "role", "annotationText");
+	
+	// Create dashboard
+
+	var dashboard = new google.visualization.Dashboard(document
+			.getElementById(containerId));
+	
+	var dateControl = new google.visualization.ControlWrapper({
+		"controlType" : "ChartRangeFilter",
+		"containerId" : "psi-control1",
+		"options" : {
+			"filterColumnIndex" : 0,
+			"ui" : {
+				"chartType" : "AreaChart",
+				"chartView" : {
+					"columns" : [0, 1]
+				},
+				"chartOptions" : {
+					'enableInteractivity' : false,
+					'chartArea' : {
+						'height' : '100%'
+					},
+					'legend' : {
+						'position' : 'none'
+					},
+					'hAxis' : {
+						'textPosition' : 'in'
+					},
+					'vAxis' : {
+						'textPosition' : 'none',
+						'gridlines' : {
+							'color' : 'none'
+						}
+					},
+					"series" : [ {
+						"color" : "black"
+					} ]
+				},
+				"snapToData" : true
+			}
+		},
+		"state" : {
+			"range" : {
+				// Selected range is 19 Jun 2013 to 24 Jun 2013
+				"start" : new Date(2013, 5, 19),
+				"end" : new Date(2013, 5, 24)
+			}
+		}
+	});
 
 	var chart = new google.visualization.ChartWrapper(
 	{
-		"containerId" : "psi-hourly",
+		"containerId" : "psi-chart1",
 		"chartType" : "AreaChart",
 
 		"options" : {
@@ -167,15 +216,16 @@ Haze.Viz.PSI.chart = function(response) {
 				}
 			},
 			"legend" : {
-				"position" : "bottom",
+				"position" : "top",
 				"textStyle" : {
 					"fontSize" : 14
 				}
 			},
 			"chartArea" : {
 				"width" : "99%",
-				"height" : "85%",
-				"left" : 0
+				"height" : "90%",
+				"left" : 0,
+				"top" : 40
 			},
 			"focusTarget" : "category",
 			"series" : [ {
@@ -193,10 +243,10 @@ Haze.Viz.PSI.chart = function(response) {
 
 	});
 	
-	chart.setDataTable(data);
-	
-	chart.draw();
-};
+	dashboard.bind([ dateControl ], [ chart ]);
+
+	dashboard.draw(data);
+}
 
 Haze.Viz.PSI24 = {
 	dataSourceUrl : "//docs.google.com/spreadsheet/pub?key=0ArgBv2Jut0VxdHVWSFpQYkY1NG0tTlVTR2VHVUdadXc&headers=1&gid=1"
@@ -209,15 +259,57 @@ Haze.Viz.PSI24.query = function() {
 	query.setQuery("select A, min(C) group by A pivot B "
 			+ "format A 'EEE ha, d MMM yyyy' ");
 
-	query.send(Haze.Viz.PSI24.chart);
+	query.send(Haze.Viz.PSI24.dashboard);
 };
 
-Haze.Viz.PSI24.chart = function(response) {
+Haze.Viz.PSI24.dashboard = function(response) {
+	var containerId = "region";
 	var data = response.getDataTable();
 
-	var chart = new google.visualization.ChartWrapper(
-	{
-		"containerId" : "psi-region",
+	// Create dashboard
+
+	var dashboard = new google.visualization.Dashboard(document
+			.getElementById(containerId));
+
+	var dateControl = new google.visualization.ControlWrapper({
+		"controlType" : "ChartRangeFilter",
+		"containerId" : "region-control1",
+		"options" : {
+			"filterColumnIndex" : 0,
+			"ui" : {
+				"chartType" : "LineChart",
+				"chartOptions" : {
+					'enableInteractivity' : false,
+					'chartArea' : {
+						'height' : '100%'
+					},
+					'legend' : {
+						'position' : 'none'
+					},
+					'hAxis' : {
+						'textPosition' : 'in'
+					},
+					'vAxis' : {
+						'textPosition' : 'none',
+						'gridlines' : {
+							'color' : 'none'
+						}
+					}
+				},
+				"snapToData" : true
+			}
+		},
+		"state" : {
+			"range" : {
+				// Selected range is 19 Jun 2013 to 24 Jun 2013
+				"start" : new Date(2013, 5, 19),
+				"end" : new Date(2013, 5, 24)
+			}
+		}
+	});
+
+	var chart = new google.visualization.ChartWrapper({
+		"containerId" : "region-chart1",
 		"chartType" : "LineChart",
 
 		"options" : {
@@ -234,22 +326,23 @@ Haze.Viz.PSI24.chart = function(response) {
 				}
 			},
 			"legend" : {
-				"position" : "bottom",
+				"position" : "top",
 				"textStyle" : {
 					"fontSize" : 14
 				}
 			},
 			"chartArea" : {
 				"width" : "99%",
-				"height" : "85%",
-				"left" : 0
-			},				
+				"height" : "90%",
+				"left" : 0,
+				"top" : 40
+			},
 			"focusTarget" : "category"
 		}
 
 	});
-	
-	chart.setDataTable(data);
-	
-	chart.draw();
+	dashboard.bind([ dateControl ], [ chart ]);
+
+	dashboard.draw(data);
+			
 };

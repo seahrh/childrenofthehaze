@@ -100,14 +100,12 @@ and the dropdown list below it
 	margin: 2em 0 2em 0;
 }
 
-#psi-hourly.chart, 
-#psi-region.chart,
-#pm25.chart {
+.chart {
 	margin: 0 0 0 0;
 	height: 25em;
 }
 
-#pm25-date-filter {
+.date-slider {
 	margin: 0 0 1em 0;
 	height: 6em;
 }

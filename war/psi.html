@@ -124,8 +124,9 @@
 						target="_blank">nature wants</a>. Meanwhile, keep calm and carry on working.</em>
 				</p>
 				
-				<div class="chart-container">
-					<div id="psi-hourly" class="chart"></div>
+				<div id="psi" class="chart-container">
+					<div id="psi-chart1" class="chart"></div>
+					<div id="psi-control1" class="date-slider"></div>
 					<p class="muted">
 						<small>Source: National Environment Agency, <a
 							href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/psi/past-24-hour-psi-readings" target="_blank">PSI and
@@ -149,8 +150,9 @@
 
 				<hr />
 				
-				<div class="chart-container">
-					<div id="psi-region" class="chart"></div>
+				<div id="region" class="chart-container">
+					<div id="region-chart1" class="chart"></div>
+					<div id="region-control1" class="date-slider"></div>
 					<p class="muted">
 						<small>Source: National Environment Agency, <a
 							href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/psi/past-24-hour-psi-readings" target="_blank">PSI and
@@ -251,6 +253,15 @@
 						+ "<tr class='warning'><td>201 - 300</td><td>Very Unhealthy</td></tr>"
 						+ "<tr class='error'><td>Above 300</td><td>Hazardous</td></tr>"
 						+ "</table>"
+			});
+			
+			// Tooltip for date sliders
+			
+			$("div.date-slider").tooltip({
+					title : "Drag the slider or adjust the thumbs to select a date range",
+					placement : "bottom",
+					html : false,
+					trigger : "hover"
 			});
 		});
 	</script>
