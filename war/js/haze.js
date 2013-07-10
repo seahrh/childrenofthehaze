@@ -14,25 +14,63 @@ Haze.Viz.PM25.query = function() {
 			+ "label max(C) 'PSI', max(D) 'PM2.5' "
 			+ "format A 'EEE ha, d MMM yyyy' ");
 	
-	query.send(Haze.Viz.PM25.chart);
+	query.send(Haze.Viz.PM25.dashboard);
 };
 
-Haze.Viz.PM25.chart = function(response) {
+Haze.Viz.PM25.dashboard = function(response) {
+	var containerId = "dashboard-pm25";
 	var data = response.getDataTable();
 	
-	// Annotation for PSI 3-hr
-	//data.setColumnProperty(2, "role", "annotation");
-	//data.setColumnProperty(3, "role", "annotationText");
-	
-	// Annotation for PSI 24-hr MAX column
-	//data.setColumnProperty(6, "role", "annotation");
-	//data.setColumnProperty(7, "role", "annotationText");
+	// Create dashboard
 
-	var chart = new google.visualization.ChartWrapper(
-	{
+	var dashboard = new google.visualization.Dashboard(document
+			.getElementById(containerId));
+
+	var dateControl = new google.visualization.ControlWrapper({
+		"controlType" : "ChartRangeFilter",
+		"containerId" : "pm25-date-filter",
+		"options" : {
+			"filterColumnIndex" : 0,
+			"ui" : {
+				"chartType" : "AreaChart",
+				"chartOptions" : {
+					'enableInteractivity' : false,
+					'chartArea' : {
+						'height' : '100%'
+					},
+					'legend' : {
+						'position' : 'none'
+					},
+					'hAxis' : {
+						'textPosition' : 'in'
+					},
+					'vAxis' : {
+						'textPosition' : 'none',
+						'gridlines' : {
+							'color' : 'none'
+						}
+					},
+					"series" : [ {
+						"color" : "red"
+					}, {
+						"color" : "orange"
+					} ]
+				},
+				"snapToData" : true
+			}
+		},
+		"state" : {
+			"range" : {
+				// Selected range is 17 Jun 2013 to 24 Jun 2013
+				"start" : new Date(2013, 5, 17),
+				"end" : new Date(2013, 5, 24)
+			}
+		}
+	});
+	
+	var chart = new google.visualization.ChartWrapper({
 		"containerId" : "pm25",
 		"chartType" : "AreaChart",
-
 		"options" : {
 			"title" : "PM2.5 vs. PSI 24-Hour Averages",
 			"vAxis" : {
@@ -51,7 +89,8 @@ Haze.Viz.PM25.chart = function(response) {
 				}
 			},
 			"legend" : {
-				"position" : "bottom",
+				"position" : "top",
+				"alignment" : "left",
 				"textStyle" : {
 					"fontSize" : 14
 				}
@@ -59,22 +98,24 @@ Haze.Viz.PM25.chart = function(response) {
 			"chartArea" : {
 				"width" : "99%",
 				"height" : "85%",
-				"left" : 0
+				"left" : 0,
+				"top" : 50
 			},
 			"focusTarget" : "category",
 			"series" : [ {
 				"color" : "red"
 			}, {
 				"color" : "orange"
-			}]				
-			
+			} ]
+
 		}
 
 	});
-	
-	chart.setDataTable(data);
-	
-	chart.draw();
+
+	dashboard.bind([ dateControl ], [ chart ]);
+
+	dashboard.draw(data);
+
 };
 
 Haze.Viz.PSI = {
