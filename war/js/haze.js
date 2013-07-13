@@ -75,12 +75,10 @@ Haze.Viz.PM25.dashboard = function(response) {
 			"title" : "PM2.5 vs. PSI 24-Hour Averages",
 			"vAxis" : {
 				"title" : "",
-				"textPosition" : "in",
-				"minValue" : 0,
-				"maxValue" : 400,
-				"gridlines" : {
-					"count" : 5
-				}
+				"textPosition" : "in"
+				//"minValue" : 0,
+				//"maxValue" : 400,
+				//"gridlines" : {"count" : 5}
 			},
 			"hAxis" : {
 				"textPosition" : "none",
@@ -202,12 +200,10 @@ Haze.Viz.PSI.dashboard = function(response) {
 			"title" : "PSI Hourly Updates",
 			"vAxis" : {
 				"title" : "",
-				"textPosition" : "in",
-				"minValue" : 0,
-				"maxValue" : 500,
-				"gridlines" : {
-					"count" : 6
-				}
+				"textPosition" : "in"
+				//"minValue" : 0,
+				//"maxValue" : 500,
+				//"gridlines" : {"count" : 6}
 			},
 			"hAxis" : {
 				"textPosition" : "none",
