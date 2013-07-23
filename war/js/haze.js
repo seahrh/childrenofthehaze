@@ -18,10 +18,17 @@ Haze.Viz.PM25.query = function() {
 };
 
 Haze.Viz.PM25.dashboard = function(response) {
-	var containerId = "pm25";
-	var data = response.getDataTable();
+	var toDate = new Date();
 	
-	// Create dashboard
+	var fromDate = new Date();
+	
+	// Initial filter chart by the last 7 days
+	
+	fromDate.setDate(toDate.getDate() - 7);
+	
+	var containerId = "pm25";
+	
+	var data = response.getDataTable();
 
 	var dashboard = new google.visualization.Dashboard(document
 			.getElementById(containerId));
@@ -61,9 +68,8 @@ Haze.Viz.PM25.dashboard = function(response) {
 		},
 		"state" : {
 			"range" : {
-				// Selected range is 17 Jun 2013 to 24 Jun 2013
-				"start" : new Date(2013, 5, 17),
-				"end" : new Date(2013, 5, 24)
+				"start" : fromDate,
+				"end" : toDate
 			}
 		}
 	});
@@ -132,6 +138,14 @@ Haze.Viz.PSI.query = function() {
 };
 
 Haze.Viz.PSI.dashboard = function(response) {
+	var toDate = new Date();
+	
+	var fromDate = new Date();
+	
+	// Initial filter chart by the last 7 days
+	
+	fromDate.setDate(toDate.getDate() - 7);
+	
 	var containerId = "psi";
 	var data = response.getDataTable();
 	
@@ -184,9 +198,9 @@ Haze.Viz.PSI.dashboard = function(response) {
 		},
 		"state" : {
 			"range" : {
-				// Selected range is 19 Jun 2013 to 24 Jun 2013
-				"start" : new Date(2013, 5, 19),
-				"end" : new Date(2013, 5, 24)
+				
+				"start" : fromDate,
+				"end" : toDate
 			}
 		}
 	});
@@ -259,6 +273,14 @@ Haze.Viz.PSI24.query = function() {
 };
 
 Haze.Viz.PSI24.dashboard = function(response) {
+	var toDate = new Date();
+	
+	var fromDate = new Date();
+	
+	// Initial filter chart by the last 7 days
+	
+	fromDate.setDate(toDate.getDate() - 7);
+	
 	var containerId = "region";
 	var data = response.getDataTable();
 
@@ -297,9 +319,9 @@ Haze.Viz.PSI24.dashboard = function(response) {
 		},
 		"state" : {
 			"range" : {
-				// Selected range is 19 Jun 2013 to 24 Jun 2013
-				"start" : new Date(2013, 5, 19),
-				"end" : new Date(2013, 5, 24)
+	
+				"start" : fromDate,
+				"end" : toDate
 			}
 		}
 	});
