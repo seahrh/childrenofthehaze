@@ -369,22 +369,67 @@ Haze.Map = {};
 
 Haze.Map.Hotspot = {};
 
+Haze.Map.Hotspot.getKmlUrl = function() {
+	var prefix = "http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa18";
+	var suffix = "-kml.kml";
+	
+	var today = new Date();
+	var yesterday = new Date();
+	yesterday.setDate(today.getDate() - 1);
+	
+	// Default kml url is yesterday's kml file
+	
+	var year = yesterday.getFullYear();
+	
+	var month = yesterday.getMonth() + 1;
+	
+	// Left padding with zero if month is single digit
+	
+	if (month < 10) {
+		month = "0" + month;
+	}
+	
+	var day = yesterday.getDate();
+	
+	// Left padding with zero if day of month is single digit
+	
+	if (day < 10) {
+		day = "0" + month;
+	}
+	
+	return prefix + day + month + year + suffix;
+	
+	
+};
+
 Haze.Map.Hotspot.draw = function() {
 	var map;
 	var kmlLayer;
-	var src = 'http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa1823072013-kml.kml';
+	var src = Haze.Map.Hotspot.getKmlUrl();
+	
+	//console.log(src);
 
 	map = new google.maps.Map(document.getElementById('map'), {
-		// Map centered on Dumai, Riau province
+		// By default, map centered on Dumai, Riau province
 		center : new google.maps.LatLng(1.6667, 101.4500),
-		zoom : 15,
+		zoom : 8,
 		mapTypeId : google.maps.MapTypeId.TERRAIN
 	});
 	kmlLayer = new google.maps.KmlLayer(src, {
 		suppressInfoWindows : false,
-		preserveViewport : false,
+		preserveViewport : true,
 		map : map
 	});
+
+	// Set the map center to the center of the kml layer default viewport
+	// Event is triggered when contents of the kml layer are loaded
+	// and its default viewport is computed
+		
+	google.maps.event.addListener(kmlLayer, 'defaultviewport_changed',
+			function() {
+				var bounds = kmlLayer.getDefaultViewport();
+				map.setCenter(bounds.getCenter());
+			});
 
 	map.setOptions({
 		disableDefaultUI : false
