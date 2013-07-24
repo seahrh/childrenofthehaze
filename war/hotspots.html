@@ -110,7 +110,7 @@
 
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<p>
+			<p class="muted">
 				The map below shows the hotspots in Sumatra on 23 July 2013. Source:
 				National Environment Agency, <a
 					href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/psi/hotspot-and-satellite-images"
@@ -149,30 +149,7 @@
 	
 		google.maps.event.addDomListener(window, 'load', Haze.Map.Hotspot.draw);
 	
-		$(document)
-				.ready(
-						function() {
-
-							$(".infobar #whatpm25")
-									.popover(
-											{
-												"title" : "Particulate Matter (PM)",
-												"placement" : "bottom",
-												"html" : true,
-												"trigger" : "hover",
-												"content" : "<p>Particulate matter is the term for particles found in the air, including dust, dirt, soot, smoke, and liquid droplets.  Particles less than 10 micrometers in diameter (PM10) pose a health concern because they can be inhaled into and accumulate in the respiratory system. Particles less than 2.5 micrometers in diameter (PM2.5) are referred to as <em>fine</em> particles and are believed to pose the greatest health risks. Because of their small size (approximately 1/30th the average width of a human hair), fine particles can lodge deeply into the lungs.</p>"
-											});
-							
-							// Tooltip for date sliders
-							
-							$("div.date-slider").tooltip({
-									title : "Drag the slider or adjust the thumbs to select a date range",
-									placement : "bottom",
-									html : false,
-									trigger : "hover"
-							});
-							
-						});
+		
 	</script>
 
 	<!-- Tweet button -->

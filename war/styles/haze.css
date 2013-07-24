@@ -123,3 +123,16 @@ and the dropdown list below it
 #map {
 	height: 58em;
 }
+
+/* Fix for bootstrap conflict with google maps
+@url http://stackoverflow.com/questions/9141249/twitter-bootstrap-css-affecting-google-maps
+*/
+
+#map img {
+  max-width: none;
+}
+
+#map label {
+  width: auto;
+  display: inline;
+}
