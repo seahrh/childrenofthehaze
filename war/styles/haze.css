@@ -114,3 +114,12 @@ and the dropdown list below it
 	margin: 2em 0 .5em 0;
 }
 
+/* Hotspots Page
+********************************************************/
+#map-container {
+	width: 100%
+}
+
+#map {
+	height: 58em;
+}

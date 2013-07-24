@@ -364,3 +364,29 @@ Haze.Viz.PSI24.dashboard = function(response) {
 	dashboard.draw(data);
 			
 };
+
+Haze.Map = {};
+
+Haze.Map.Hotspot = {};
+
+Haze.Map.Hotspot.draw = function() {
+	var map;
+	var kmlLayer;
+	var src = 'http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa1823072013-kml.kml';
+
+	map = new google.maps.Map(document.getElementById('map'), {
+		// Map centered on Dumai, Riau province
+		center : new google.maps.LatLng(1.6667, 101.4500),
+		zoom : 15,
+		mapTypeId : google.maps.MapTypeId.TERRAIN
+	});
+	kmlLayer = new google.maps.KmlLayer(src, {
+		suppressInfoWindows : false,
+		preserveViewport : false,
+		map : map
+	});
+
+	map.setOptions({
+		disableDefaultUI : false
+	});
+};
