@@ -110,31 +110,56 @@
 
 	<div class="container-fluid">
 		<div class="row-fluid">
+			<div class="span10">
+				<div id="map-container">
+					<div id="map"></div>
+				</div>
+			</div>
+			<div class="span2">
+				<p>The map shows the hotspots in Sumatra on this date:
+				</p>
+
+				<div class="input-prepend">
+					<span class="add-on">Date</span> <input
+						class="inline-top input-small" id="kml-date" type="text"
+						placeholder="ddmmyyyy">
+				</div>
+				
+				<p>Dates with high number of hotspots:</p>
+				
+				<table class="table table-hover table-condensed">
+					<tr>
+						<th>Date</th>
+						<th>Number of hotspots</th>
+					</tr>
+					<tr>
+						<td>23072013</td>
+						<td><a href="https://www.facebook.com/photo.php?fbid=588558541195372&set=a.234440306607199.89003.219808688070361&type=1&permPage=1" target="_blank">292</a></td>
+					</tr>
+				</table>
+
+				<p class="muted">
+					Daily data available since 13 June 2013. Source: National
+					Environment Agency, <a
+						href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/psi/hotspot-and-satellite-images"
+						target="_blank">Hotspot and Satellite Images</a>.
+				</p>
+
+			</div>
+		</div>
+		<div class="row-fluid">
+			<hr />
 			<p class="muted">
-				The map below shows the hotspots in Sumatra on 23 July 2013. Source:
-				National Environment Agency, <a
-					href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/psi/hotspot-and-satellite-images"
-					target="_blank">Hotspot and Satellite Images</a>.
+				<small>Feedback to seahrh (at) gmail (dot) com. <a
+					href="https://github.com/seahrh/childrenofthehaze/" target="_blank">Get
+						the code</a> on Github. Join the <a
+					href="http://sgratrace.appspot.com/" target="_blank">Great
+						Singapore Rat Race</a>
+				</small>
 			</p>
 		</div>
 	</div>
 	<!-- /.container-fluid -->
-
-	<div id="map-container">
-		<div id="map"></div>
-	</div>
-
-	<div class="container-fluid">
-		<hr />
-		<p class="muted">
-			<small>Feedback to seahrh (at) gmail (dot) com. <a
-				href="https://github.com/seahrh/childrenofthehaze/" target="_blank">Get
-					the code</a> on Github. Join the <a
-				href="http://sgratrace.appspot.com/" target="_blank">Great
-					Singapore Rat Race</a>
-			</small>
-		</p>
-	</div>
 
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
@@ -147,8 +172,32 @@
 
 	<script type="text/javascript">
 	
+		$(document).ready(function(){
+			
+			$("input#kml-date").tooltip({
+					title : "Enter a date in DDMMYYYY format to see the hotspots on that day",
+					placement : "bottom",
+					html : false,
+					trigger : "hover"
+			});
+			
+			$("input#kml-date").change(function() {
+				var dateString = $("input#kml-date").val();
+				var date = new Date();
+				date.setDate(dateString.slice(0,2));
+				date.setMonth(dateString.slice(2,4) - 1);
+				date.setFullYear(dateString.slice(4,8));
+				date.setHours(0,0,0,0);
+				window.kmlDate = date;
+				Haze.Map.Hotspot.draw();
+			});
+		});
+		
+		// Load the KML on the map
+		
 		google.maps.event.addDomListener(window, 'load', Haze.Map.Hotspot.draw);
-	
+		
+		
 		
 	</script>
 

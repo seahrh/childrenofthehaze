@@ -13,6 +13,26 @@ h1 {
 	font-size: 1.24em;
 }
 
+/* Fix for tooltip text not wrapping
+@url http://stackoverflow.com/questions/13338780/how-to-make-twitter-bootstrap-tooltips-have-multiple-lines 
+*/
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+/* Fix for bootstrap conflict with google maps
+@url http://stackoverflow.com/questions/9141249/twitter-bootstrap-css-affecting-google-maps
+*/
+#map img {
+	max-width: none;
+}
+
+#map label {
+	width: auto;
+	display: inline;
+}
+
 /* Social Buttons
 ********************************************************/
 #fb-like-button {
@@ -28,6 +48,11 @@ h1 {
 .inline-top {
 	display: inline-block;
 	vertical-align: top;
+}
+
+.inline-middle {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 p.essay {
@@ -49,13 +74,6 @@ ol.essay li,ul.essay li {
 
 hr.footer-line {
 	margin-top: 5em;
-}
-
-/* Infobar beside the page title
-********************************************************/
-
-.infobar a {
-	margin: 0 .5em .5em 0;
 }
 
 /* Google Visualization UI
@@ -124,15 +142,8 @@ and the dropdown list below it
 	height: 58em;
 }
 
-/* Fix for bootstrap conflict with google maps
-@url http://stackoverflow.com/questions/9141249/twitter-bootstrap-css-affecting-google-maps
-*/
-
-#map img {
-  max-width: none;
-}
-
-#map label {
-  width: auto;
-  display: inline;
+input#kml-date {
+	margin: 0 0 1em 0;
+	display: inline-block;
+	vertical-align: .5em;
 }

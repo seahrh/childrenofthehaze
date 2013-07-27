@@ -373,31 +373,36 @@ Haze.Map.Hotspot.getKmlUrl = function() {
 	var prefix = "http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa18";
 	var suffix = "-kml.kml";
 	
-	var today = new Date();
-	var yesterday = new Date();
-	yesterday.setDate(today.getDate() - 1);
+	var date = window.kmlDate;
 	
-	// Default kml url is yesterday's kml file
-	
-	var year = yesterday.getFullYear();
-	
-	var month = yesterday.getMonth() + 1;
-	
-	// Left padding with zero if month is single digit
-	
-	if (month < 10) {
-		month = "0" + month;
+	if (!date || !date instanceof Date) {
+		var today = new Date();
+		var yesterday = new Date();
+		yesterday.setDate(today.getDate() - 1);
+		
+		// Default kml url is yesterday's kml file
+		date = yesterday;
 	}
 	
-	var day = yesterday.getDate();
+	// Remove time component, which allows for date comparison later
+	// Save in global variable
 	
-	// Left padding with zero if day of month is single digit
+	date.setHours(0,0,0,0);
+	window.kmlDate = date;
+	console.log("kmlDate : " + date);
 	
-	if (day < 10) {
-		day = "0" + month;
+	var dateString = Haze.Util.toDateString(date);
+		
+	// URL typo correction for 24 July 2013
+	
+	var typoDate = new Date(2013,6,24);
+	//console.log("typoDate : " + typoDate.getTime());
+	
+	if (date.getTime() === typoDate.getTime()) {
+		suffix = "-km.kml";
 	}
 	
-	return prefix + day + month + year + suffix;
+	return prefix + dateString + suffix;
 	
 	
 };
@@ -407,7 +412,7 @@ Haze.Map.Hotspot.draw = function() {
 	var kmlLayer;
 	var src = Haze.Map.Hotspot.getKmlUrl();
 	
-	//console.log(src);
+	console.log("kmlUrl : " + src);
 
 	map = new google.maps.Map(document.getElementById('map'), {
 		// By default, map centered on Dumai, Riau province
@@ -431,7 +436,44 @@ Haze.Map.Hotspot.draw = function() {
 				map.setCenter(bounds.getCenter());
 			});
 
+	// Display the date of the KML file
+	// after map loading is completed
+	
+	google.maps.event.addListener(map, 'idle', function() {
+			$('input#kml-date').val(Haze.Util.toDateString(window.kmlDate));
+	});
+	
 	map.setOptions({
 		disableDefaultUI : false
 	});
+};
+
+Haze.Util = {};
+
+// Return a DDMMYYYY string representation of a Date object
+
+Haze.Util.toDateString = function(date) {
+	var year = "";
+	var month = "";
+	var day = "";
+	if (date && date instanceof Date) {
+		year = date.getFullYear();
+
+		month = date.getMonth() + 1;
+
+		// Left padding with zero if month is single digit
+
+		if (month < 10) {
+			month = "0" + month;
+		}
+
+		day = date.getDate();
+
+		// Left padding with zero if day of month is single digit
+
+		if (day < 10) {
+			day = "0" + month;
+		}
+	}
+	return day + month + year;
 };
