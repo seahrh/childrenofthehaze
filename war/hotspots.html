@@ -133,8 +133,16 @@
 						<th># Hotspots</th>
 					</tr>
 					<tr>
+						<td>24062013</td>
+						<td><a href="https://www.facebook.com/photo.php?fbid=576237699094123&set=a.234440306607199.89003.219808688070361&type=1&relevant_count=1" target="_blank">437</a></td>
+					</tr>
+					<tr>
 						<td>23072013</td>
 						<td><a href="https://www.facebook.com/photo.php?fbid=588558541195372&set=a.234440306607199.89003.219808688070361&type=1&permPage=1" target="_blank">292</a></td>
+					</tr>
+					<tr>
+						<td>18062013</td>
+						<td><a href="https://www.facebook.com/photo.php?fbid=576237699094123&set=a.234440306607199.89003.219808688070361&type=1&relevant_count=1" target="_blank">187</a></td>
 					</tr>
 				</table>
 
@@ -184,10 +192,12 @@
 			$("input#kml-date").change(function() {
 				var dateString = $("input#kml-date").val();
 				var date = new Date();
-				date.setDate(dateString.slice(0,2));
-				date.setMonth(dateString.slice(2,4) - 1);
-				date.setFullYear(dateString.slice(4,8));
+				var day = parseInt(dateString.slice(0,2), 10);
+				var month = parseInt(dateString.slice(2,4), 10) - 1;
+				var year = parseInt(dateString.slice(4,8), 10);
+				date.setFullYear(year, month, day);
 				date.setHours(0,0,0,0);
+				//console.log("Input date : " + date);
 				window.kmlDate = date;
 				Haze.Map.Hotspot.draw();
 			});

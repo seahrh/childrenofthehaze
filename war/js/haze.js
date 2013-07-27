@@ -468,12 +468,13 @@ Haze.Util.toDateString = function(date) {
 		}
 
 		day = date.getDate();
-
+		
 		// Left padding with zero if day of month is single digit
 
 		if (day < 10) {
-			day = "0" + month;
+			day = "0" + day;
 		}
+		//console.log("Day : " + day);
 	}
 	return day + month + year;
 };
