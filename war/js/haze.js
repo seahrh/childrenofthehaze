@@ -370,18 +370,22 @@ Haze.Map = {};
 Haze.Map.Hotspot = {};
 
 Haze.Map.Hotspot.getKmlUrl = function() {
-	var prefix = "http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa18";
+	
+	var prefix = "http://childrenofthehaze.appspot.com/kml/noaa18";
+	//var prefix = "http://app2.nea.gov.sg/docs/default-source/anti-pollution-radiation-protection/air-pollution/hotspot-and-satellite-images/noaa18";
 	var suffix = "-kml.kml";
 	
 	var date = window.kmlDate;
 	
 	if (!date || !date instanceof Date) {
-		var today = new Date();
-		var yesterday = new Date();
-		yesterday.setDate(today.getDate() - 1);
+		//var today = new Date();
+		//var yesterday = new Date();
+		//yesterday.setDate(today.getDate() - 1);
 		
 		// Default kml url is yesterday's kml file
-		date = yesterday;
+		//date = yesterday;
+		
+		date = new Date(2013,7,16);
 	}
 	
 	// Remove time component, which allows for date comparison later
@@ -412,6 +416,7 @@ Haze.Map.Hotspot.draw = function() {
 	var kmlLayer;
 	var src = Haze.Map.Hotspot.getKmlUrl();
 	
+		
 	console.log("kmlUrl : " + src);
 
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -446,6 +451,16 @@ Haze.Map.Hotspot.draw = function() {
 	map.setOptions({
 		disableDefaultUI : false
 	});
+	
+	// Status of the KML Layer once loaded
+	
+	google.maps.event.addListener(kmlLayer, 'status_changed',
+			function() {
+				console.log("KML Layer Status : " + kmlLayer.getStatus());
+			});
+	
+	
+	
 };
 
 Haze.Util = {};

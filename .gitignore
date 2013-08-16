@@ -32,6 +32,14 @@ local.properties
 war/WEB-INF/classes
 war/WEB-INF/lib
 
+# Static Assets
+
+war/kml
+
+# Test pages
+
+war/map.html
+
 #################
 ## Visual Studio
 #################
