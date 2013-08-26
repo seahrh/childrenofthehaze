@@ -226,6 +226,8 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="js/haze.js"></script>
+	
+	<script type="text/javascript" src="js/spin.min.js"></script>
 
 	<!-- Required for loading Google Visualization API -->
 	<script type="text/javascript" src="//www.google.com/jsapi"></script>
@@ -242,7 +244,14 @@
 	</script>
 
 	<script type="text/javascript">
+		// Show a spinning load indicator
+		// while the page is loading
+		var spinner;
+	
 		$(document).ready(function(){
+			
+			// Once the DOM is loaded, start spinning
+			spinner = Haze.UI.LoadAnimation.start();
 			
 			$(".infobar #whatpsi").popover({
 				"title" : "Pollutant Standards Index (PSI)",
@@ -268,6 +277,11 @@
 					html : false,
 					trigger : "hover"
 			});
+		});
+		
+		$(window).load(function(){
+			// Once the page is fully loaded, stop spinning
+			Haze.UI.LoadAnimation.stop(spinner);
 		});
 	</script>
 

@@ -132,7 +132,10 @@
 						<th>Date</th>
 						<th># Hotspots</th>
 					</tr>
-					
+					<tr>
+						<td>26082013</td>
+						<td><a href="https://www.facebook.com/photo.php?fbid=605001429551083&set=a.234440306607199.89003.219808688070361&type=1" target="_blank">488</a></td>
+					</tr>
 					<tr>
 						<td>24062013</td>
 						<td><a href="https://www.facebook.com/photo.php?fbid=576237699094123&set=a.234440306607199.89003.219808688070361&type=1&relevant_count=1" target="_blank">437</a></td>
@@ -177,6 +180,8 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript" src="js/haze.js"></script>
+	
+	<script type="text/javascript" src="js/spin.min.js"></script>
 
 	<!-- Required for loading Google Visualization API -->
 	<script type="text/javascript" src="//www.google.com/jsapi"></script>
@@ -185,7 +190,14 @@
 
 	<script type="text/javascript">
 	
+		// Show a spinning load indicator
+		// while the page is loading
+		var spinner;
+	
 		$(document).ready(function(){
+			
+			// Once the DOM is loaded, start spinning
+			spinner = Haze.UI.LoadAnimation.start();
 			
 			$("input#kml-date").tooltip({
 					title : "Enter a date in DDMMYYYY format to see the hotspots on that day",
@@ -206,6 +218,11 @@
 				window.kmlDate = date;
 				Haze.Map.Hotspot.draw();
 			});
+		});
+		
+		$(window).load(function(){
+			// Once the page is fully loaded, stop spinning
+			Haze.UI.LoadAnimation.stop(spinner);
 		});
 		
 		// Load the KML on the map

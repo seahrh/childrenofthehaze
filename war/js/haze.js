@@ -385,7 +385,7 @@ Haze.Map.Hotspot.getKmlUrl = function() {
 		// Default kml url is yesterday's kml file
 		//date = yesterday;
 		
-		date = new Date(2013,7,16);
+		date = new Date(2013,7,26);
 	}
 	
 	// Remove time component, which allows for date comparison later
@@ -461,6 +461,36 @@ Haze.Map.Hotspot.draw = function() {
 	
 	
 	
+};
+
+Haze.UI = {};
+
+Haze.UI.LoadAnimation = {
+	"start" : function(){
+		var opts = {
+			lines : 13, // The number of lines to draw
+			length : 7, // The length of each line
+			width : 4, // The line thickness
+			radius : 10, // The radius of the inner circle
+			corners : 1, // Corner roundness (0..1)
+			rotate : 0, // The rotation offset
+			color : '#000', // #rgb or #rrggbb
+			speed : 1, // Rounds per second
+			trail : 60, // Afterglow percentage
+			shadow : false, // Whether to render a shadow
+			hwaccel : false, // Whether to use hardware acceleration
+			className : 'spinner', // The CSS class to assign to the spinner
+			zIndex : 2e9, // The z-index (defaults to 2000000000)
+			top : $(window).height()/2.5, // Manual positioning in viewport
+			left : "auto"
+			
+		};
+		var target = $("body")[0];
+		return new Spinner(opts).spin(target);
+	},
+	"stop" : function(spinner){
+		spinner.stop();
+	}
 };
 
 Haze.Util = {};
