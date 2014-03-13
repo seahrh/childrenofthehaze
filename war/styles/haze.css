@@ -72,8 +72,19 @@ ol.essay li,ul.essay li {
 	text-align: justify;
 }
 
-hr.footer-line {
-	margin-top: 5em;
+/* Footer
+********************************************************/
+
+#footer {
+	margin: 2em 0 0 0;
+	padding-bottom: 4em;
+	background-color: #333333;
+	color: #ffffff;
+	height: 6em;
+}
+
+#footer p {
+	margin: 1em 0 0 0;
 }
 
 /* Google Visualization UI
@@ -115,7 +126,7 @@ and the dropdown list below it
 ********************************************************/
 
 .chart-container {
-	margin: 2em 0 2em 0;
+	margin: 3em 0 3em 0;
 }
 
 .chart {
@@ -125,7 +136,7 @@ and the dropdown list below it
 
 .date-slider {
 	margin: 0 0 1em 0;
-	height: 6em;
+	height: 5em;
 }
 
 #pm25-advisory {

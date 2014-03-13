@@ -6,19 +6,23 @@
         <meta itemprop="description" content="Singapore Haze 2013">
         <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
         <!-- Facebook Open Graph tags -->
         <meta property="og:title"
-        content="Children of the Haze - Singapore Air Quality" />
+        content="Children of the Haze - Singapore Haze 2013" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://childrenofthehaze.appspot.com/" />
         <meta property="og:image" content="" />
         <meta property="og:site_name" content="Children of the Haze" />
         <!-- /Facebook Open Graph tags -->
-        <title>Children of the Haze</title>
+
+        <title>Singapore PM2.5 Readings 2013 - Children of the Haze</title>
+
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="styles/haze.css" type="text/css">
         <script type="text/javascript"
         src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
         <script>
             (function(i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -35,8 +39,11 @@
             ga('create', 'UA-41921540-1', 'childrenofthehaze.appspot.com');
             ga('send', 'pageview');
         </script>
+
     </head>
+
     <body>
+
         <!-- Javascript SDK for Facebook Like Button HTML5 Plugin -->
         <div id="fb-root"></div>
         <script>
@@ -51,6 +58,7 @@
                 }(document, 'script', 'facebook-jssdk'));
         </script>
         <!-- /Javascript SDK for Facebook Like Button HTML5 Plugin -->
+
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -66,13 +74,13 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="index.html">2014</a>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">2013 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>
+                                <li class="active">
                                     <a href="pm25-2013.html">PM2.5</a>
                                 </li>
                                 <li>
@@ -111,49 +119,123 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
+                    <div class="infobar pull-right clearfix visible-desktop">
+                        <a id="whatpm25"
+                        href="http://www.epa.gov/pmdesignations/faq.htm"
+                        class="btn btn-info" rel="popover" target="_blank" role="button"><span
+                        class="glyphicon glyphicon-info-sign"></span> What is PM2.5?</a>
+                    </div>
+
                     <p class="essay">
                         <em>Stop screaming, children, this is what <a
                         href="//www.mrbrown.com/blog/2013/06/dumbass-remark-of-the-week-ahgong.html"
                         target="_blank">nature wants</a>. Meanwhile, keep calm and carry on working.</em>
                     </p>
-                    <div class="page-header">
-                        <h1>Singapore Haze <small>2014</small></h1>
-                    </div>
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label for="reading-toggle" class="control-label">Show me: </label>
-                            <select id="reading-toggle" class="form-control">
-                                <option value="pm25">PM2.5</option>
-                                <option value="psi" selected>PSI</option>
-                            </select>
-                        </div>
-                    </form>
 
-                    <div id="overview" class="chart-container">
-                        <div id="overview-chart1" class="chart"></div>
-                        <div id="overview-control1" class="date-slider"></div>
-                        <p class="text-muted">
+                    <div id="pm25" class="chart-container">
+                        <div id="pm25-chart1" class="chart"></div>
+                        <div id="pm25-control1" class="date-slider"></div>
+                        <p class="muted">
                             <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
-                                target="_blank">spreadsheet</a>.</small>
+                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours"
+                                target="_blank">PSI and PM2.5 Readings</a>. Chart shows the
+                                highest 24-hour averages of PSI and PM2.5 in Singapore at any
+                                one time. Readings are left truncated on 21 June 8am. Download
+                                the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdHVWSFpQYkY1NG0tTlVTR2VHVUdadXc&usp=sharing#gid=1"
+                                target="_blank">spreadsheet</a>. </small>
                         </p>
                     </div>
 
-                    <div id="regional" class="chart-container">
-                        <div id="regional-chart1" class="chart"></div>
-                        <div id="regional-control1" class="date-slider"></div>
-                        <p class="text-muted">
-                            <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
-                                target="_blank">spreadsheet</a>.</small>
-                        </p>
-                    </div>
+                    <p class="essay">
+                        <strong>Under haze conditions, PM2.5 is consistently
+                        higher than PSI.</strong> Made up of <a
+                        href="http://www.airinfonow.org/html/ed_particulate.html"
+                        target="_blank">toxic organic compounds and heavy metals</a>,
+                        PM2.5 (fine) particles are smaller than PM10 (coarse) particles, so
+                        they can stay in the air longer and <a
+                        href="http://www.theonlinecitizen.com/2013/06/look-at-pm25-reading-not-psi/"
+                        target="_blank">penetrate deeper</a> into the lungs. Hence, PM2.5
+                        particles pose the greatest health risks. Official <a
+                        href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/haze/health-advisory-for-haze"
+                        target="_blank">health advisories</a> take into account <a
+                        href="http://www.channelnewsasia.com/news/singapore/nea-includes-pm2-5-in-its/723582.html"
+                        target="_blank">both the 24-hour PSI and the 24-hour PM2.5</a>, <a
+                        href="http://youtu.be/xjG-Fyu5MPI" target="_blank">whichever
+                        is worse</a>. If that is the case, why isn't the highest level advisory <span class="label label-danger">Everyone should avoid all physical activity outdoors</span> issued when PM2.5 exceeded 150?
+                    </p>
+
+                    <table id="pm25-advisory" class="table table-striped">
+                        <tr>
+                            <th>24-hr PM2.5 Concentration
+                            <br />
+                            (microgram/cubic metre) </th>
+                            <th>Health Advisory</th>
+                        </tr>
+                        <tr>
+                            <td>0 to 15</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;15 to 40</td>
+                            <td>None for the general population. Unusually sensitive
+                            people should consider reducing prolonged or heavy exertion.</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;40 to 65</td>
+                            <td>Following groups should reduce prolonged or heavy outdoor
+                            exertion:
+                            <ul>
+                                <li>
+                                    People with heart or lung disease
+                                </li>
+                                <li>
+                                    Children and older adults
+                                </li>
+                            </ul> Everyone else should limit prolonged or heavy exertion. </td>
+                        </tr>
+                        <tr>
+                            <td>&gt;65 to 150</td>
+                            <td>Following groups should avoid all physical activity
+                            outdoors:
+                            <ul>
+                                <li>
+                                    People with heart or lung disease
+                                </li>
+                                <li>
+                                    Children and older adults
+                                </li>
+                            </ul> Everyone else should avoid prolonged or heavy exertion. </td>
+                        </tr>
+                        <tr class="error">
+                            <td>&gt;150 to 250</td>
+                            <td>Following groups should remain indoors and keep activity
+                            levels low:
+                            <ul>
+                                <li>
+                                    People with heart or lung disease
+                                </li>
+                                <li>
+                                    Children and older adults
+                                </li>
+                            </ul><strong>Everyone else should avoid all physical activity outdoors.</strong></td>
+                        </tr>
+                    </table>
+
+                    <p>
+                        <small> Source: National Environment Agency, <a
+                            href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/health-advisories"
+                            target="_blank">Health Advisories</a></small>
+                    </p>
                 </div>
             </div>
+
         </div>
+        <!-- /.container-fluid -->
+
         <div id="footer">
             <div class="container-fluid">
                 <div class="row">
@@ -172,22 +254,20 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/haze.js"></script>
         <script type="text/javascript" src="js/spin.min.js"></script>
+
         <!-- Required for loading Google Visualization API -->
         <script type="text/javascript" src="//www.google.com/jsapi"></script>
+
         <script type="text/javascript">
             // Loads the Google Visualization libraries
             google.load('visualization', '1', {
                 'packages' : ['controls']
             });
             google.setOnLoadCallback(function() {
-
-                hazy.viz.timeSeries({
-                    "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
-                    "overviewContainerId" : "overview",
-                    "regionalContainerId" : "regional",
-                });
+                Haze.Viz.PM25.query();
             });
         </script>
+
         <script type="text/javascript">
             // Show a spinning load indicator
             // while the page is loading
@@ -222,6 +302,7 @@
                 Haze.UI.LoadAnimation.stop(spinner);
             });
         </script>
+
         <!-- Tweet button -->
         <script>
             ! function(d, s, id) {

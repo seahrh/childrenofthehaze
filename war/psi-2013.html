@@ -6,19 +6,20 @@
         <meta itemprop="description" content="Singapore Haze 2013">
         <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
         <!-- Facebook Open Graph tags -->
         <meta property="og:title"
-        content="Children of the Haze - Singapore Air Quality" />
+        content="Children of the Haze - Singapore Haze 2013" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://childrenofthehaze.appspot.com/" />
         <meta property="og:image" content="" />
         <meta property="og:site_name" content="Children of the Haze" />
         <!-- /Facebook Open Graph tags -->
-        <title>Children of the Haze</title>
+        <title>Singapore PSI Readings 2013 - Children of the Haze</title>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="styles/haze.css" type="text/css">
         <script type="text/javascript"
-        src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>
             (function(i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -66,16 +67,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="index.html">2014</a>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">2013 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="pm25-2013.html">PM2.5</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="psi-2013.html">PSI</a>
                                 </li>
                                 <li>
@@ -114,46 +115,111 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
+
+                    <div class="infobar pull-right clearfix visible-desktop">
+                        <a id="whatpsi" href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/faqs-on-the-haze"
+                        class="btn btn-info" rel="popover" target="_blank" role="button"><span
+                        class="glyphicon glyphicon-info-sign"></span> What is PSI?</a>
+                    </div>
+
                     <p class="essay">
                         <em>Stop screaming, children, this is what <a
                         href="//www.mrbrown.com/blog/2013/06/dumbass-remark-of-the-week-ahgong.html"
                         target="_blank">nature wants</a>. Meanwhile, keep calm and carry on working.</em>
                     </p>
-                    <div class="page-header">
-                        <h1>Singapore Haze <small>2014</small></h1>
-                    </div>
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label for="reading-toggle" class="control-label">Show me: </label>
-                            <select id="reading-toggle" class="form-control">
-                                <option value="pm25">PM2.5</option>
-                                <option value="psi" selected>PSI</option>
-                            </select>
-                        </div>
-                    </form>
 
-                    <div id="overview" class="chart-container">
-                        <div id="overview-chart1" class="chart"></div>
-                        <div id="overview-control1" class="date-slider"></div>
-                        <p class="text-muted">
+                    <div id="psi" class="chart-container">
+                        <div id="psi-chart1" class="chart"></div>
+                        <div id="psi-control1" class="date-slider"></div>
+                        <p class="muted">
                             <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
-                                target="_blank">spreadsheet</a>.</small>
+                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and
+                                PM2.5 Readings</a>. PSI 24-hour readings are updated on an hourly basis
+                                since the 3-hour PSI peaked at 400 on 21 June 11am. 24-hour readings are
+                                left truncated on 19 June 8am. Download the <a
+                                href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdHVWSFpQYkY1NG0tTlVTR2VHVUdadXc&usp=sharing#gid=0"
+                                target="_blank">spreadsheet</a>. </small>
                         </p>
                     </div>
 
-                    <div id="regional" class="chart-container">
-                        <div id="regional-chart1" class="chart"></div>
-                        <div id="regional-control1" class="date-slider"></div>
-                        <p class="text-muted">
+                    <p class="essay">
+                        The 24-hour PSI lags behind the 3-hour PSI and
+                        differences can exceed 200 points. When the 3-hour PSI
+                        hit a record high of 401 on 21 June 12pm <strong>(A)</strong>, the 24-hour PSI hit
+                        a <a
+                        href="//sg.news.yahoo.com/how-does-singapore-measure-haze-levels--142610492.html"
+                        target="_blank">record high of 246</a> twenty hours later <strong>(B)</strong>.
+                    </p>
+
+                    <hr />
+
+                    <div id="region" class="chart-container">
+                        <div id="region-chart1" class="chart"></div>
+                        <div id="region-control1" class="date-slider"></div>
+                        <p class="muted">
                             <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
-                                target="_blank">spreadsheet</a>.</small>
+                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 Readings</a>. Download the <a
+                                href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdHVWSFpQYkY1NG0tTlVTR2VHVUdadXc&usp=sharing#gid=1"
+                                target="_blank">spreadsheet</a>. </small>
                         </p>
                     </div>
+
+                    <p class="essay">
+                        Official <a
+                        href="http://app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution/haze/health-advisory-for-haze"
+                        target="_blank">health advisories</a> are based on both <a href="http://youtu.be/xjG-Fyu5MPI"
+                        target="_blank">24-hour PSI and PM2.5 levels</a>, whichever is worse.
+                        That's because 24-hour measurements are <a
+                        href="http://www.e101.gov.sg/haze/info.htm"
+                        target="_blank">also used</a> by scientific studies on the health
+                        effects of particulate matter.
+                    </p>
+
+                    <div class="well">
+                        <p>
+                            However, doctors pointed out that Singapore’s situation is
+                            different from that of, say, Hong Kong or Mexico, where the level
+                            of pollution is constant throughout the day. Associate Professor
+                            Philip Eng, a senior consultant in respiratory medicine, said: “In
+                            our situation, it is different because the winds and the PSI
+                            levels change so drastically. The studies might be looking at
+                            health impact based on pollution levels that are more constant ...
+                            here the PSI in one day can swing from 100 to 400. So it is hard
+                            to assess the health impact like this.”
+                        </p>
+                        <p>
+                            Dr Lim Ing Ruen, an ear, nose and throat surgeon at Mount
+                            Elizabeth Medical Centre, felt that neither a 24-hour nor a
+                            three-hour measurement will give a very good picture of the health
+                            impact. “People should be assessing the PSI level right before
+                            they go out, to see if the level at that particular hour poses a
+                            threat. An average figure for the whole day may not be that
+                            reflective, as the figures can fluctuate wildly throughout the
+                            day. <strong>The key is spot PSI.</strong>” Whether one has a pre-existing
+                            condition is also a factor. “If you are asthmatic, any level of
+                            PSI can set you off,” she said.
+                        </p>
+                        <p class="muted">
+                            <small>- TODAY 22 June 2013, <cite title="TODAYOnline"><em><a
+                                    href="//www.todayonline.com/singapore/24-hour-psi-reading-betterreflection-haze-impact-health"
+                                    target="_blank">24-hour PSI reading a better reflection of
+                                    haze impact on health</a></em></cite></small>
+                        </p>
+                    </div>
+
+                    <p class="essay">
+                        As they say in statistics, the mean has no meaning without standard
+                        deviation. If Bill Gates walks into a room, everyone, on average,
+                        is a millionaire. Whatever the numbers may be, let your eyes and
+                        nose be the best judge of your health. For our leaders, their <a
+                        href="//www.facebook.com/media/set/?set=a.10151735514776383.1073741835.14440041382&type=3"
+                        target="_blank">conscience</a>.
+                    </p>
                 </div>
             </div>
+            
         </div>
+        <!-- /.container-fluid -->
         <div id="footer">
             <div class="container-fluid">
                 <div class="row">
@@ -168,26 +234,24 @@
                 </div>
             </div>
         </div>
-
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/haze.js"></script>
         <script type="text/javascript" src="js/spin.min.js"></script>
+
         <!-- Required for loading Google Visualization API -->
         <script type="text/javascript" src="//www.google.com/jsapi"></script>
+
         <script type="text/javascript">
             // Loads the Google Visualization libraries
             google.load('visualization', '1', {
                 'packages' : ['controls']
             });
             google.setOnLoadCallback(function() {
-
-                hazy.viz.timeSeries({
-                    "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
-                    "overviewContainerId" : "overview",
-                    "regionalContainerId" : "regional",
-                });
+                Haze.Viz.PSI.query();
+                Haze.Viz.PSI24.query();
             });
         </script>
+
         <script type="text/javascript">
             // Show a spinning load indicator
             // while the page is loading
@@ -198,12 +262,12 @@
                 // Once the DOM is loaded, start spinning
                 spinner = Haze.UI.LoadAnimation.start();
 
-                $(".infobar #whatpm25").popover({
-                    "title" : "Particulate Matter (PM)",
+                $(".infobar #whatpsi").popover({
+                    "title" : "Pollutant Standards Index (PSI)",
                     "placement" : "bottom",
                     "html" : true,
                     "trigger" : "hover",
-                    "content" : "<p>Particulate matter is the term for particles found in the air, including dust, dirt, soot, smoke, and liquid droplets.  Particles less than 10 micrometers in diameter (PM10) pose a health concern because they can be inhaled into and accumulate in the respiratory system. Particles less than 2.5 micrometers in diameter (PM2.5) are referred to as <em>fine</em> particles and are believed to pose the greatest health risks. Because of their small size (approximately 1/30th the average width of a human hair), fine particles can lodge deeply into the lungs.</p>"
+                    "content" : "<p>PSI includes air pollutants such as sulphur dioxide, nitrogen dioxide, ozone, carbon monoxide and particulate matter called PM10 (particulate matter of 10 microns or smaller in size).</p>" + "<table class='table table-condensed'>" + "<tr><th>PSI Values</th><th>Descriptor</th></tr>" + "<tr class='success'><td>0 - 50</td><td>Good</td></tr>" + "<tr class='success'><td>51 - 100</td><td>Moderate</td></tr>" + "<tr class='warning'><td>101 - 200</td><td>Unhealthy</td></tr>" + "<tr class='danger'><td>201 - 300</td><td>Very Unhealthy</td></tr>" + "<tr class='danger'><td>Above 300</td><td>Hazardous</td></tr>" + "</table>"
                 });
 
                 // Tooltip for date sliders
@@ -214,7 +278,6 @@
                     html : false,
                     trigger : "hover"
                 });
-
             });
 
             $(window).load(function() {
@@ -222,6 +285,7 @@
                 Haze.UI.LoadAnimation.stop(spinner);
             });
         </script>
+
         <!-- Tweet button -->
         <script>
             ! function(d, s, id) {

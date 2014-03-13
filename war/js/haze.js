@@ -505,3 +505,314 @@ Haze.Util.toDateString = function(date) {
     }
     return day + month + year;
 };
+
+/**
+ * Hazy Namespace
+ */
+( function(hazy, $, undefined) {
+
+    }(window.hazy = window.hazy || {}, jQuery));
+( function(viz, $, undefined) {
+
+        viz.timeSeries = function(opts) {
+
+            var defaults;
+
+            defaults = {
+                "overviewContainerId" : "",
+                "regionalContainerId" : "",
+                "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
+                "mostRecentDays" : 3,
+                "pm25Cols" : [0, 1, 2],
+                "psiCols" : [0, 9, 10, 8],
+                "regionalPm25Cols" : [0, 3, 4, 5, 6, 7],
+                "regionalPsiCols" : [0, 11, 12, 13, 14, 15]
+            };
+
+            if ( typeof opts === "object") {
+                opts = $.extend(defaults, opts);
+            } else {
+                opts = defaults;
+            }
+
+            query();
+
+            function query() {
+                var query;
+                query = new google.visualization.Query(opts.dataSourceUrl);
+
+                query.setQuery("select A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P order by A format A 'EEE ha, d MMM yyyy' ");
+
+                query.send(draw);
+            }
+
+            function draw(response) {
+
+                var data, overviewDb, regionalDb;
+
+                if (response.isError()) {
+                    console.log('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                    return;
+                }
+
+                data = response.getDataTable();
+
+                overviewDb = overviewDashboard(opts.overviewContainerId);
+                regionalDb = regionalDashboard(opts.regionalContainerId);
+                overviewDb.draw(data);
+                regionalDb.draw(data);
+            }
+
+            function overviewDashboard(containerId) {
+
+                var toDate, fromDate, dashboard, dateControl, chart;
+
+                toDate = new Date();
+                fromDate = new Date();
+                fromDate.setDate(toDate.getDate() - opts.mostRecentDays);
+
+                dashboard = new google.visualization.Dashboard(document.getElementById(containerId));
+                dateControl = new google.visualization.ControlWrapper({
+                    "controlType" : "ChartRangeFilter",
+                    "containerId" : containerId + "-control1",
+                    "options" : {
+                        "filterColumnIndex" : 0,
+                        "ui" : {
+                            "chartType" : "AreaChart",
+                            "chartOptions" : {
+                                'enableInteractivity' : false,
+                                'chartArea' : {
+                                    'height' : '100%'
+                                },
+                                'legend' : {
+                                    'position' : 'none'
+                                },
+                                'hAxis' : {
+                                    'textPosition' : 'in'
+                                },
+                                'vAxis' : {
+                                    'textPosition' : 'none',
+                                    'gridlines' : {
+                                        'color' : 'none'
+                                    }
+                                },
+                                "series" : [{
+                                    "color" : "red"
+                                }, {
+                                    "color" : "orange"
+                                }, {
+                                    "color" : "black"
+                                }]
+                            },
+                            "chartView" : {
+                                'columns' : opts.psiCols
+                            },
+                            "snapToData" : true
+                        }
+                    },
+                    "state" : {
+                        "range" : {
+                            "start" : fromDate,
+                            "end" : toDate
+                        }
+                    }
+                });
+
+                chart = new google.visualization.ChartWrapper({
+                    "containerId" : containerId + "-chart1",
+                    "chartType" : "AreaChart",
+                    "options" : {
+                        "title" : "Singapore Hourly Air Quality",
+                        "vAxis" : {
+                            "title" : "",
+                            "textPosition" : "in"
+                            //"minValue" : 0,
+                            //"maxValue" : 400,
+                            //"gridlines" : {"count" : 5}
+                        },
+                        "hAxis" : {
+                            "textPosition" : "none",
+                            "textStyle" : {
+                                "fontSize" : 14
+                            }
+                        },
+                        "legend" : {
+                            "position" : "top",
+                            "alignment" : "left",
+                            "textStyle" : {
+                                "fontSize" : 14
+                            }
+                        },
+                        "chartArea" : {
+                            "width" : "99%",
+                            "height" : "90%",
+                            "left" : 0,
+                            "top" : 40
+                        },
+                        "focusTarget" : "category",
+                        "series" : [{
+                            "color" : "red"
+                        }, {
+                            "color" : "orange"
+                        }, {
+                            "color" : "black"
+                        }]
+                    }
+
+                });
+
+                chart.setView({
+                    'columns' : opts.psiCols
+                });
+
+                dashboard.bind([dateControl], [chart]);
+
+                // Attach listener before drawing the dashboard
+
+                google.visualization.events.addOneTimeListener(dashboard, 'ready', function() {
+
+                    $("#reading-toggle").change(function() {
+
+                        var readingType;
+                        readingType = $("#reading-toggle option:selected").val();
+                        if (readingType === "psi") {
+                            dateControl.setOption("ui.chartView.columns", opts.psiCols);
+                            chart.setView({
+                                "columns" : opts.psiCols
+                            });
+                        } else {
+                            dateControl.setOption("ui.chartView.columns", opts.pm25Cols);
+                            chart.setView({
+                                "columns" : opts.pm25Cols
+                            });
+                        }
+                        dateControl.draw();
+                        chart.draw();
+                    });
+
+                });
+
+                return dashboard;
+            }
+
+            function regionalDashboard(containerId) {
+
+                var toDate, fromDate, dashboard, dateControl, chart;
+
+                toDate = new Date();
+                fromDate = new Date();
+                fromDate.setDate(toDate.getDate() - opts.mostRecentDays);
+
+                dashboard = new google.visualization.Dashboard(document.getElementById(containerId));
+                dateControl = new google.visualization.ControlWrapper({
+                    "controlType" : "ChartRangeFilter",
+                    "containerId" : containerId + "-control1",
+                    "options" : {
+                        "filterColumnIndex" : 0,
+                        "ui" : {
+                            "chartType" : "LineChart",
+                            "chartOptions" : {
+                                'enableInteractivity' : false,
+                                'chartArea' : {
+                                    'height' : '100%'
+                                },
+                                'legend' : {
+                                    'position' : 'none'
+                                },
+                                'hAxis' : {
+                                    'textPosition' : 'in'
+                                },
+                                'vAxis' : {
+                                    'textPosition' : 'none',
+                                    'gridlines' : {
+                                        'color' : 'none'
+                                    }
+                                }
+                            },
+                            "chartView" : {
+                                'columns' : opts.regionalPsiCols
+                            },
+                            "snapToData" : true
+                        }
+                    },
+                    "state" : {
+                        "range" : {
+                            "start" : fromDate,
+                            "end" : toDate
+                        }
+                    }
+                });
+
+                chart = new google.visualization.ChartWrapper({
+                    "containerId" : containerId + "-chart1",
+                    "chartType" : "LineChart",
+                    "options" : {
+                        "title" : "Singapore Hourly Air Quality By Region",
+                        "vAxis" : {
+                            "title" : "",
+                            "textPosition" : "in"
+                            //"minValue" : 0,
+                            //"maxValue" : 400,
+                            //"gridlines" : {"count" : 5}
+                        },
+                        "hAxis" : {
+                            "textPosition" : "none",
+                            "textStyle" : {
+                                "fontSize" : 14
+                            }
+                        },
+                        "legend" : {
+                            "position" : "top",
+                            "alignment" : "left",
+                            "textStyle" : {
+                                "fontSize" : 14
+                            }
+                        },
+                        "chartArea" : {
+                            "width" : "99%",
+                            "height" : "90%",
+                            "left" : 0,
+                            "top" : 40
+                        },
+                        "focusTarget" : "category"
+                    }
+
+                });
+
+                chart.setView({
+                    'columns' : opts.regionalPsiCols
+                });
+
+                dashboard.bind([dateControl], [chart]);
+
+                // Attach listener before drawing the dashboard
+
+                google.visualization.events.addOneTimeListener(dashboard, 'ready', function() {
+
+                    $("#reading-toggle").change(function() {
+
+                        var readingType;
+                        readingType = $("#reading-toggle option:selected").val();
+                        if (readingType === "psi") {
+                            dateControl.setOption("ui.chartView.columns", opts.regionalPsiCols);
+                            chart.setView({
+                                "columns" : opts.regionalPsiCols
+                            });
+                        } else {
+                            dateControl.setOption("ui.chartView.columns", opts.regionalPm25Cols);
+                            chart.setView({
+                                "columns" : opts.regionalPm25Cols
+                            });
+                        }
+                        dateControl.draw();
+                        chart.draw();
+                    });
+
+                });
+
+                return dashboard;
+            }
+
+        };
+
+    }(window.hazy.viz = window.hazy.viz || {}, jQuery));
