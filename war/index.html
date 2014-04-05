@@ -114,43 +114,38 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <p class="essay">
-                        <em>Stop screaming, children, this is what <a
-                        href="//www.mrbrown.com/blog/2013/06/dumbass-remark-of-the-week-ahgong.html"
-                        target="_blank">nature wants</a>. Meanwhile, keep calm and carry on working.</em>
-                    </p>
                     <div class="page-header">
                         <h1>Singapore Haze <small>2014</small></h1>
                     </div>
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label for="reading-toggle" class="control-label">Show me: </label>
-                            <select id="reading-toggle" class="form-control">
-                                <option value="pm25">PM2.5</option>
-                                <option value="psi" selected>PSI</option>
-                            </select>
-                        </div>
-                    </form>
-
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        From 1 April 2014, the National Environment Agency (NEA) has implemented a new air quality reporting system. The PSI will incorporate <a class="alert-link" href="//app2.nea.gov.sg/corporate-functions/newsroom/news-releases/new-air-quality-reporting-system-to-take-effect-from-1-april-2014" target="_blank">PM2.5 as the sixth pollution parameter</a>. The 3-hour PSI will also take into account PM2.5 concentrations. In addition, NEA will also publish the <a class="alert-link" href="//app2.nea.gov.sg/corporate-functions/newsroom/news-releases/new-air-quality-reporting-system-from-1-may-2014" target="_blank">1-hour PM2.5 concentrations every hour</a>.
+                    </div>
                     <div id="overview" class="chart-container">
                         <div id="overview-chart1" class="chart"></div>
                         <div id="overview-control1" class="date-slider"></div>
                         <p class="text-muted">
                             <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
+                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI readings</a> are updated hourly between 7am and 11pm. Data is left truncated on 7 March 2014. 24-hour PM2.5 readings are no longer available after the <a href="//app2.nea.gov.sg/corporate-functions/newsroom/news-releases/new-air-quality-reporting-system-to-take-effect-from-1-april-2014" target="_blank">new air quality reporting system</a> was effective 1 April 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
                                 target="_blank">spreadsheet</a>.</small>
                         </p>
                     </div>
-
                     <div id="regional" class="chart-container">
                         <div id="regional-chart1" class="chart"></div>
                         <div id="regional-control1" class="date-slider"></div>
                         <p class="text-muted">
                             <small>Source: National Environment Agency, <a
-                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI and PM2.5 readings</a> are available hourly between 7am and 11pm. Data is left truncated on 7 March 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
+                                href="//app2.nea.gov.sg/anti-pollution-radiation-protection/air-pollution-control/psi/psi-readings-over-the-last-24-hours" target="_blank">PSI readings</a> are updated hourly between 7am and 11pm. Data is left truncated on 7 March 2014. 24-hour PM2.5 readings are no longer available after the <a href="//app2.nea.gov.sg/corporate-functions/newsroom/news-releases/new-air-quality-reporting-system-to-take-effect-from-1-april-2014" target="_blank">new air quality reporting system</a> was effective 1 April 2014. Download the <a href="//docs.google.com/spreadsheet/ccc?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&usp=sharing"
                                 target="_blank">spreadsheet</a>.</small>
                         </p>
                     </div>
+                    <p class="essay">
+                        <em>Stop screaming, children, this is what <a
+                        href="//www.mrbrown.com/blog/2013/06/dumbass-remark-of-the-week-ahgong.html"
+                        target="_blank">nature wants</a>. Meanwhile, keep calm and carry on working.</em>
+                    </p>
                 </div>
             </div>
         </div>
@@ -198,14 +193,7 @@
                 // Once the DOM is loaded, start spinning
                 spinner = Haze.UI.LoadAnimation.start();
 
-                $(".infobar #whatpm25").popover({
-                    "title" : "Particulate Matter (PM)",
-                    "placement" : "bottom",
-                    "html" : true,
-                    "trigger" : "hover",
-                    "content" : "<p>Particulate matter is the term for particles found in the air, including dust, dirt, soot, smoke, and liquid droplets.  Particles less than 10 micrometers in diameter (PM10) pose a health concern because they can be inhaled into and accumulate in the respiratory system. Particles less than 2.5 micrometers in diameter (PM2.5) are referred to as <em>fine</em> particles and are believed to pose the greatest health risks. Because of their small size (approximately 1/30th the average width of a human hair), fine particles can lodge deeply into the lungs.</p>"
-                });
-
+             
                 // Tooltip for date sliders
 
                 $("div.date-slider").tooltip({

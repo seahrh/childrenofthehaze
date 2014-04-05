@@ -511,8 +511,7 @@ Haze.Util.toDateString = function(date) {
  */
 ( function(hazy, $, undefined) {
 
-    }(window.hazy = window.hazy || {}, jQuery));
-( function(viz, $, undefined) {
+    }(window.hazy = window.hazy || {}, jQuery)); ( function(viz, $, undefined) {
 
         viz.timeSeries = function(opts) {
 
@@ -524,9 +523,9 @@ Haze.Util.toDateString = function(date) {
                 "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
                 "mostRecentDays" : 3,
                 "pm25Cols" : [0, 1, 2],
-                "psiCols" : [0, 9, 10, 8],
+                "psiCols" : [0, 2, 3, 1],
                 "regionalPm25Cols" : [0, 3, 4, 5, 6, 7],
-                "regionalPsiCols" : [0, 11, 12, 13, 14, 15]
+                "regionalPsiCols" : [0, 4, 5, 6, 7, 8]
             };
 
             if ( typeof opts === "object") {
@@ -541,7 +540,7 @@ Haze.Util.toDateString = function(date) {
                 var query;
                 query = new google.visualization.Query(opts.dataSourceUrl);
 
-                query.setQuery("select A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P order by A format A 'EEE ha, d MMM yyyy' ");
+                query.setQuery("select A, I, J, K, L, M, N, O, P order by A format A 'EEE ha, d MMM yyyy' ");
 
                 query.send(draw);
             }
@@ -682,6 +681,14 @@ Haze.Util.toDateString = function(date) {
                             });
                         } else {
                             dateControl.setOption("ui.chartView.columns", opts.pm25Cols);
+                            
+                            /*dateControl.setState({
+                                "range" : {
+                                    "start" : new Date(2014, 2, 9),
+                                    "end" : new Date(2014, 2, 11)
+                                }
+                            });*/
+                            
                             chart.setView({
                                 "columns" : opts.pm25Cols
                             });
@@ -792,6 +799,7 @@ Haze.Util.toDateString = function(date) {
                     $("#reading-toggle").change(function() {
 
                         var readingType;
+
                         readingType = $("#reading-toggle option:selected").val();
                         if (readingType === "psi") {
                             dateControl.setOption("ui.chartView.columns", opts.regionalPsiCols);
@@ -799,7 +807,16 @@ Haze.Util.toDateString = function(date) {
                                 "columns" : opts.regionalPsiCols
                             });
                         } else {
+
                             dateControl.setOption("ui.chartView.columns", opts.regionalPm25Cols);
+
+                            /*dateControl.setState({
+                                "range" : {
+                                    "start" : new Date(2014, 2, 9),
+                                    "end" : new Date(2014, 2, 11)
+                                }
+                            });*/
+
                             chart.setView({
                                 "columns" : opts.regionalPm25Cols
                             });
