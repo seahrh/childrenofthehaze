@@ -521,7 +521,7 @@ Haze.Util.toDateString = function(date) {
                 "overviewContainerId" : "",
                 "regionalContainerId" : "",
                 "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
-                "mostRecentDays" : 3,
+                "mostRecentDays" : 7,
                 "pm25Cols" : [0, 1, 2],
                 "psiCols" : [0, 2, 3, 1],
                 "regionalPm25Cols" : [0, 3, 4, 5, 6, 7],
@@ -540,7 +540,7 @@ Haze.Util.toDateString = function(date) {
                 var query;
                 query = new google.visualization.Query(opts.dataSourceUrl);
 
-                query.setQuery("select A, I, J, K, L, M, N, O, P order by A format A 'EEE ha, d MMM yyyy' ");
+                query.setQuery("select A, I, J, K, L, M, N, O, P where A >= dateTime '2014-05-01 00:00:00' order by A format A 'EEE ha, d MMM yyyy' ");
 
                 query.send(draw);
             }
