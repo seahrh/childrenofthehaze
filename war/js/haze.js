@@ -587,7 +587,8 @@ Haze.Util.toDateString = function(date) {
                                     'position' : 'none'
                                 },
                                 'hAxis' : {
-                                    'textPosition' : 'in'
+                                    'textPosition' : 'in',
+                                    "format" : "d MMM y"
                                 },
                                 'vAxis' : {
                                     'textPosition' : 'none',
@@ -630,10 +631,8 @@ Haze.Util.toDateString = function(date) {
                             //"gridlines" : {"count" : 5}
                         },
                         "hAxis" : {
-                            "textPosition" : "none",
-                            "textStyle" : {
-                                "fontSize" : 14
-                            }
+                            "textPosition" : "in",
+                            "format" : "d MMM y"
                         },
                         "legend" : {
                             "position" : "top",
@@ -727,7 +726,8 @@ Haze.Util.toDateString = function(date) {
                                     'position' : 'none'
                                 },
                                 'hAxis' : {
-                                    'textPosition' : 'in'
+                                    'textPosition' : 'in',
+                                    "format" : "d MMM y"
                                 },
                                 'vAxis' : {
                                     'textPosition' : 'none',
@@ -763,10 +763,8 @@ Haze.Util.toDateString = function(date) {
                             //"gridlines" : {"count" : 5}
                         },
                         "hAxis" : {
-                            "textPosition" : "none",
-                            "textStyle" : {
-                                "fontSize" : 14
-                            }
+                            "textPosition" : "in",
+                            "format" : "d MMM y"
                         },
                         "legend" : {
                             "position" : "top",
