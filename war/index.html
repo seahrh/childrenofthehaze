@@ -32,8 +32,9 @@
                 m.parentNode.insertBefore(a, m)
             })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-            ga('create', 'UA-41921540-1', 'childrenofthehaze.appspot.com');
+            ga('create', 'UA-41921540-1', 'auto');
             ga('send', 'pageview');
+
         </script>
     </head>
     <body>
@@ -167,6 +168,7 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/haze.js"></script>
         <script type="text/javascript" src="js/spin.min.js"></script>
+        <script type="text/javascript" src="vendor/moment/moment.min.js"></script>
         <!-- Required for loading Google Visualization API -->
         <script type="text/javascript" src="//www.google.com/jsapi"></script>
         <script type="text/javascript">
@@ -193,7 +195,6 @@
                 // Once the DOM is loaded, start spinning
                 spinner = Haze.UI.LoadAnimation.start();
 
-             
                 // Tooltip for date sliders
 
                 $("div.date-slider").tooltip({

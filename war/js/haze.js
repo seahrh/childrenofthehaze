@@ -522,6 +522,7 @@ Haze.Util.toDateString = function(date) {
                 "regionalContainerId" : "",
                 "dataSourceUrl" : "//docs.google.com/spreadsheet/tq?key=0ArgBv2Jut0VxdGdiMlJ6ZlM4NGFwUGpvR0RTdlAtRnc&headers=1&gid=5",
                 "mostRecentDays" : 7,
+                "slidingWindowLength" : 21, /* Length of the query sliding window (days) */ 
                 "pm25Cols" : [0, 1, 2],
                 "psiCols" : [0, 2, 3, 1],
                 "regionalPm25Cols" : [0, 3, 4, 5, 6, 7],
@@ -537,10 +538,13 @@ Haze.Util.toDateString = function(date) {
             query();
 
             function query() {
-                var query;
+                var query, date;
+                
+                date = moment().subtract(opts.slidingWindowLength, "days").format("YYYY-MM-DD HH:mm:ss");
+                
                 query = new google.visualization.Query(opts.dataSourceUrl);
 
-                query.setQuery("select A, I, J, K, L, M, N, O, P where A >= dateTime '2014-05-01 00:00:00' order by A format A 'EEE ha, d MMM yyyy' ");
+                query.setQuery("select A, I, J, K, L, M, N, O, P where A >= dateTime '" + date + "' order by A format A 'EEE ha, d MMM yyyy' ");
 
                 query.send(draw);
             }
@@ -581,7 +585,8 @@ Haze.Util.toDateString = function(date) {
                             "chartOptions" : {
                                 'enableInteractivity' : false,
                                 'chartArea' : {
-                                    'height' : '100%'
+                                    'height' : '100%',
+                                    'width' : '100%'
                                 },
                                 'legend' : {
                                     'position' : 'none'
@@ -642,7 +647,7 @@ Haze.Util.toDateString = function(date) {
                             }
                         },
                         "chartArea" : {
-                            "width" : "99%",
+                            "width" : "100%",
                             "height" : "90%",
                             "left" : 0,
                             "top" : 40
@@ -720,7 +725,8 @@ Haze.Util.toDateString = function(date) {
                             "chartOptions" : {
                                 'enableInteractivity' : false,
                                 'chartArea' : {
-                                    'height' : '100%'
+                                    'height' : '100%',
+                                    'width' : '100%'
                                 },
                                 'legend' : {
                                     'position' : 'none'
@@ -774,7 +780,7 @@ Haze.Util.toDateString = function(date) {
                             }
                         },
                         "chartArea" : {
-                            "width" : "99%",
+                            "width" : "100%",
                             "height" : "90%",
                             "left" : 0,
                             "top" : 40
